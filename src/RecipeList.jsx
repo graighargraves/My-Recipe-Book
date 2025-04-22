@@ -1,21 +1,27 @@
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import SignUp from './SignUp'
+
 
 function RecipeList({recipes, setRecipes, favRecipe, setFavRecipe, recipeId, setRecipeId}){
      const navigate = useNavigate()
 
-const handleclick2 = (recipeId) => {
-    setRecipeId(recipeId)
-    navigate("/recipepage")
-}
-
-
     const handleclick = (recipe) => {
+        // if (!token) {
+        //     alert("Please sign up!")
+        //     return
+        // }
         setFavRecipe(recipe)
         navigate("/favorite")
     }
 
     return(
         <>
+        <div>
+            <SignUp/>
+            </div>
+        <br></br>
+        
         {
             recipes.map((recipe)=> {
                 const {idMeal, strMeal, StrCategory, strArea, strMealThumb} = recipe;
@@ -24,7 +30,7 @@ const handleclick2 = (recipeId) => {
                         <img src={strMealThumb} style={{height: "400px"}}/>
                         <h2>{strMeal}</h2>
                         <button onClick={()=> handleclick(recipe)}>Favorite</button>   
-                        <button onClick={()=> handleclick2(recipeId)}>View Details</button>                     
+                        <Link to={`/recipe/${recipe.idMeal}`}>View Details</Link>                     
                     </div>
                 )
             })

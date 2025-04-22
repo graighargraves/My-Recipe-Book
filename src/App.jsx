@@ -4,12 +4,12 @@ import RecipeList from './RecipeList'
 import {Routes, Route, Link} from 'react-router-dom'
 import FavoriteRecipe from './FavoriteRecipe'
 import RecipePage from './RecipePage.jsx'
-
+import SignUp from './SignUp.jsx'
 
 function App() {
 const [recipes, setRecipes] = useState([])
 const [favRecipe, setFavRecipe] = useState([])
-const [recipeId, setRecipeId] = useState([])
+const [token, setToken] = useState([])
 
   useEffect(()=>{
     
@@ -29,10 +29,25 @@ const [recipeId, setRecipeId] = useState([])
     <Link to="/favorite">Favorite</Link>
     </nav>
 
+{/* <div>
+  {!token ? (
+    <SignUp setToken={setToken} />
+  ) : (
+      <>
+        <RecipeList
+          recipes={recipes}
+          setFavRecipe={setFavRecipe}
+          token={token}
+        />
+        </>
+  )
+  }
+</div> */}
+
 <Routes>
   <Route path ="/" element={<RecipeList recipes={recipes} setRecipes={setRecipes} favRecipe={favRecipe} setFavRecipe={setFavRecipe}/>}/>
   <Route path="/favorite" element={<FavoriteRecipe favRecipe={favRecipe} setFavRecipe={setFavRecipe}/>}/>
-  <Route path="/recipepage" element={<RecipePage recipeId={recipeId} setRecipeId={setRecipeId} recipes={recipes} setRecipes={setRecipes}/>}/>
+  <Route path="/recipe/:id" element={<RecipePage recipes={recipes} />} />
 </Routes>
 
 
